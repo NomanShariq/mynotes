@@ -51,7 +51,9 @@ class _RegisterViewState extends State<RegisterView> {
             obscureText: true,
             enableSuggestions: false,
             autocorrect: false,
-            decoration: const InputDecoration(hintText: 'Enter your password'),
+            decoration: const InputDecoration(
+              hintText: 'Enter your password',
+            ),
           ),
           TextButton(
             onPressed: () async {
@@ -72,15 +74,19 @@ class _RegisterViewState extends State<RegisterView> {
                 }
               }
             },
-            child: const Text('Register'),
+            child: const Text(
+              'Register',
+            ),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context)
                   .pushNamedAndRemoveUntil(loginRoute, (route) => false);
             },
-            child: const Text('Already Registered ? Login now!'),
-          )
+            child: const Text(
+              'Already Registered ? Login now!',
+            ),
+          ),
         ],
       ),
     );

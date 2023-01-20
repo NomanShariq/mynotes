@@ -14,7 +14,7 @@ void main() {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: const HomePage(),
       routes: {
@@ -108,20 +108,28 @@ Future<bool> showlogoutDialog(BuildContext context) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text('Sign Out'),
-        content: const Text('Are you sure you want to log out'),
+        title: const Text(
+          'Sign Out',
+        ),
+        content: const Text(
+          'Are you sure you want to log out',
+        ),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(false);
             },
-            child: const Text('Cancel'),
+            child: const Text(
+              'Cancel',
+            ),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(true);
             },
-            child: const Text('Logout'),
+            child: const Text(
+              'Logout',
+            ),
           ),
         ],
       );
