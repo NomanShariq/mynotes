@@ -74,10 +74,11 @@ class _NotesViewState extends State<NotesView> {
                   stream: _notesService.allNotes,
                   builder: (context, snapshot) {
                     switch (snapshot.connectionState) {
+                      case ConnectionState.active:
                       case ConnectionState.waiting:
                         return const Text('All notes are Loading...');
                       default:
-                        return const CircularProgressIndicator.adaptive();
+                        return const CircularProgressIndicator();
                     }
                   },
                 );
@@ -86,6 +87,7 @@ class _NotesViewState extends State<NotesView> {
             }
           },
         ));
+    // body: const Text('nom'),
   }
 }
 
