@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mynotes/constants/routes.dart';
 import 'package:mynotes/services/auth/auth_exceptions.dart';
 import 'package:mynotes/services/auth/auth_service.dart';
-import 'package:mynotes/utilities/show_error_dialog.dart';
+
+import '../utilities/dialogs/show_error_dialog.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+  const LoginView({
+    super.key,
+  });
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -33,7 +36,9 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text(
+          'Login',
+        ),
       ),
       body: Column(
         children: [
@@ -51,7 +56,9 @@ class _LoginViewState extends State<LoginView> {
             obscureText: true,
             enableSuggestions: false,
             autocorrect: false,
-            decoration: const InputDecoration(hintText: 'Enter your password'),
+            decoration: const InputDecoration(
+              hintText: 'Enter your password',
+            ),
           ),
           TextButton(
             onPressed: () async {
@@ -60,7 +67,7 @@ class _LoginViewState extends State<LoginView> {
               try {
                 await AuthService.firebase()
                     .logIn(email: email, password: password);
-                final user =  AuthService.firebase().currentUser;
+                final user = AuthService.firebase().currentUser;
                 if (user?.isEmailVerified ?? false) {
                   if (!mounted) return;
                   Navigator.of(context).pushNamedAndRemoveUntil(
@@ -76,21 +83,34 @@ class _LoginViewState extends State<LoginView> {
                   );
                 }
               } on WeakPasswordException {
-                await showErrorDialog(context, 'Wrong password');
+                await showErrorDialog(
+                  context,
+                  'Wrong password',
+                );
               } on UserNotFoundException {
-                await showErrorDialog(context, 'User Not Found');
+                await showErrorDialog(
+                  context,
+                  'User Not Found',
+                );
               } on GenericException {
-                await showErrorDialog(context, 'Authentication failed!');
+                await showErrorDialog(
+                  context,
+                  'Authentication failed!',
+                );
               }
             },
             child: const Text('Login'),
           ),
           TextButton(
             onPressed: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil(registerRoute, (route) => false);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                registerRoute,
+                (route) => false,
+              );
             },
-            child: const Text('not Register yet? Register now!'),
+            child: const Text(
+              'not Register yet? Register now!',
+            ),
           ),
         ],
       ),

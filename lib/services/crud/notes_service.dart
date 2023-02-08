@@ -10,7 +10,7 @@ class NotesService {
 
   List<DatabaseNote> _notes = [];
 
-  static final _shared = NotesService._sharedInstacnce();
+  static final NotesService _shared = NotesService._sharedInstacnce();
   NotesService._sharedInstacnce() {
     _notesStreamController = StreamController<List<DatabaseNote>>.broadcast(
       onListen: () {
@@ -82,21 +82,21 @@ class NotesService {
   Future<DatabaseNote> getNote({required int id}) async {
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
-    final note = await db.query(
+    final notes = await db.query(
       noteTable,
       limit: 1,
       where: "id = ?",
       whereArgs: [id],
     );
 
-    if (note.isEmpty) {
+    if (notes.isEmpty) {
       throw CouldNotFindNote();
     } else {
-      final notes = DatabaseNote.fromRow(note.first);
+      final note = DatabaseNote.fromRow(notes.first);
       _notes.removeWhere((note) => id == note.id);
-      _notes.add(notes);
+      _notes.add(note);
       _notesStreamController.add(_notes);
-      return notes;
+      return note;
     }
   }
 

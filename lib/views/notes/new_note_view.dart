@@ -83,7 +83,7 @@ class _NewNoteViewState extends State<NewNoteView> {
         title: const Text('New Note'),
       ),
       body: FutureBuilder(
-        future: createNewNote(),
+        future:  createNewNote(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
@@ -93,12 +93,14 @@ class _NewNoteViewState extends State<NewNoteView> {
                 controller: _textcontroller,
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Start Typing your notes..',
                 ),
               );
             default:
-              return const CircularProgressIndicator();
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
           }
         },
       ),
