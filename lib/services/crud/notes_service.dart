@@ -63,7 +63,7 @@ class NotesService {
     } else {
       final updatedNotes = await getNote(id: note.id);
       _notes.removeWhere((note) => note.id == updatedNotes.id);
-      _notes.add(note);
+      _notes.add(updatedNotes);
       _notesStreamController.add(_notes);
       return updatedNotes;
     }
